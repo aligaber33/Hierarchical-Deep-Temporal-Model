@@ -100,7 +100,7 @@ def getpalyer_seq(image_directory, annotation_file_path, frame_sequence, max_per
 
 
 class TwoStageModelB6(nn.Module):
-    def __init__(self, num_classes=8, projection_dim=512, hidden_dim=256):
+    def __init__(self, num_classes=8, projection_dim=512, hidden_dim=512):
         super(TwoStageModelB6, self).__init__()
         
         # Load backbone
@@ -121,7 +121,7 @@ class TwoStageModelB6(nn.Module):
         self.dropout = nn.Dropout(p=0.4)
         
         # Group Temporal Model (LSTM)
-        self.player_lstm = nn.LSTM(projection_dim, hidden_dim, num_layers=1, batch_first=True)
+        self.player_lstm = nn.LSTM(projection_dim, hidden_dim, num_layers=2, batch_first=True)
         
         # Classifier Head
         self.group_classifier = nn.Sequential(
