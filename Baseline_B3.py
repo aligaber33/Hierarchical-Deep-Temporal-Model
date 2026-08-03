@@ -175,11 +175,11 @@ if __name__ == "__main__":
     feats = get_all_features(person_feats_path)
     pair = get_feat_label_pair(feats, labels)
     
-    print("\n--- 🔍 KEY INSPECTION DIAGNOSTIC ---")
+    print("\n---  KEY INSPECTION DIAGNOSTIC ---")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     dataset = PooledPeopleDataset(pair)
     if len(dataset) == 0:
-        print("\n❌ Setup of data failed. Zero records processed.")
+        print("\n Setup of data failed. Zero records processed.")
         print("Possible causes:")
         print("1. Your feature folder structure does not contain '.npy' files.")
         print("2. The action names in the text files don't match your 'label_to_idx' keys.")
@@ -237,7 +237,7 @@ if __name__ == "__main__":
     test_correct = 0
     test_total = 0
     
-    print("\n🔬 Evaluating Model Performance Against Unseen Test Set...")
+    print("\n Evaluating Model Performance Against Unseen Test Set...")
     with torch.no_grad():
         for feat, label in test_loader:
             feat, label = feat.to(device), label.to(device)
