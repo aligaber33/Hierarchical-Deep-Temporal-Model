@@ -22,7 +22,7 @@ categories_dct = {
 }
 
 class TwoStageModelB7(nn.Module):
-    def __init__(self, num_classes=8, projection_dim=512, hidden_dim=256):
+    def __init__(self, num_classes=8, projection_dim=512, hidden_dim=512):
         super(TwoStageModelB7, self).__init__()
         
         # Load backbone
@@ -43,7 +43,7 @@ class TwoStageModelB7(nn.Module):
         self.dropout = nn.Dropout(p=0.4)
         
         # Person Temporal Model (LSTM-1)
-        self.player_lstm = nn.LSTM(projection_dim, hidden_dim, num_layers=1, batch_first=True)
+        self.player_lstm = nn.LSTM(projection_dim, hidden_dim, num_layers=2, batch_first=True)
         
 
         #Group Temporal Model(LSTM-2)
