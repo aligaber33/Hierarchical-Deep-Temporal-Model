@@ -137,7 +137,7 @@ if __name__ == "__main__":
     dataset = FC7PersonFeat(annotation_path, person_feats_path, label_to_idx)
     
     if len(dataset) == 0:
-        print("\n❌ Setup of data failed. Zero records processed.")
+        print("\n Setup of data failed. Zero records processed.")
         print("Possible causes:")
         print("1. Your feature folder structure does not contain '.npy' files.")
         print("2. The action names in the text files don't match your 'label_to_idx' keys.")
@@ -191,7 +191,7 @@ if __name__ == "__main__":
     test_correct = 0
     test_total = 0
     
-    print("\n🔬 Evaluating Model Performance Against Unseen Test Set...")
+    print("\n Evaluating Model Performance Against Unseen Test Set...")
     with torch.no_grad():
         for feat, label in val_loader:
             feat, label = feat.to(device), label.to(device)
