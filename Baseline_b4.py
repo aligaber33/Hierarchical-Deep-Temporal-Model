@@ -62,7 +62,7 @@ class TemporalDataSet(Dataset):
                 
                 # FIXED: Added explicit continue block to completely drop -1 out of bounds items
                     if label == -1:
-                        print(f"⚠️ Warning: Label '{label_str}' found in {clip_dir.name} is missing from categories_dct. Skipping.")
+                        print(f" Warning: Label '{label_str}' found in {clip_dir.name} is missing from categories_dct. Skipping.")
                         continue 
                         
                     self.samples.append(clip_dir)
@@ -175,7 +175,7 @@ if __name__ == "__main__":
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.AdamW(model.parameters(), lr=1e-5, weight_decay=1e-3) # Low LR to prevent fine-tuning explosion
 
-    print("\n🏋️ Starting Baseline End-to-End Image Model Training...")
+    print("\n Starting Baseline End-to-End Image Model Training...")
     for epoch in range(EPOCHS):
         running_epoch_loss = 0.0
         correct = 0
@@ -207,7 +207,7 @@ if __name__ == "__main__":
     test_correct = 0
     test_total = 0
     
-    print("\n🔬 Evaluating Model Performance Against Unseen Test Set...")
+    print("\n Evaluating Model Performance Against Unseen Test Set...")
     with torch.no_grad():
         for feat, label in test_loader:
             feat, label = feat.to(device), label.to(device)
@@ -219,7 +219,7 @@ if __name__ == "__main__":
             test_correct += predicted.eq(label).sum().item()
             
     final_test_accuracy = (test_correct / test_total) * 100
-    print(f"📊 Final Accuracy on the Test Set: {final_test_accuracy:.2f}%")
+    print(f" Final Accuracy on the Test Set: {final_test_accuracy:.2f}%")
 
     torch.save(model.state_dict(), "Pytorch_baseline_b4.pth")
-    print("\n🎉 B1 Scene Model saved successfully as 'Pytorch_baseline_b4.pth'!")
+    print("\n B4 Scene Model saved successfully as 'Pytorch_baseline_b4.pth'!")
