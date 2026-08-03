@@ -104,7 +104,7 @@ class VolleyBallDataSet(Dataset):
         self.transform = transform
 
         if not features_root.exists():
-            print(f"🚨 Error: Features directory {features_root} does not exist.")
+            print(f"Error: Features directory {features_root} does not exist.")
             return
 
         all_video_dirs = sorted([
@@ -145,9 +145,9 @@ class VolleyBallDataSet(Dataset):
                 })
 
         if not self.samples:
-            print("\n🚨 Dataset Loading Failed: 0 samples gathered.")
+            print("\nDataset Loading Failed: 0 samples gathered.")
         else:
-            print(f"\n🚀 Success! Found and loaded {len(self.samples)} valid clips into B1 Dataset.")
+            print(f"\nSuccess! Found and loaded {len(self.samples)} valid clips into B1 Dataset.")
 
     def __len__(self):
         return len(self.samples)
@@ -204,7 +204,7 @@ if __name__ == "__main__":
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.AdamW(model.parameters(), lr=1e-4)
 
-    print("\n🏋️ Starting Baseline B1 Image Model Training...")
+    print("\n Starting Baseline B1 Image Model Training...")
     for epoch in range(EPOCHS):
         running_epoch_loss = 0.0
         correct = 0
@@ -236,7 +236,7 @@ if __name__ == "__main__":
     test_correct = 0
     test_total = 0
     
-    print("\n🔬 Evaluating Model Performance Against Unseen Test Set...")
+    print("\n Evaluating Model Performance Against Unseen Test Set...")
     with torch.no_grad():
         for feat, label in test_loader:
             feat, label = feat.to(device), label.to(device)
