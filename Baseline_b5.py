@@ -235,7 +235,7 @@ if __name__ == "__main__":
 
     labels = get_all_labels(vids_root, categories_dct)
 
-    print("\n--- 🔍 KEY INSPECTION DIAGNOSTIC ---")
+    print("\n---  KEY INSPECTION DIAGNOSTIC ---")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     dataset = B6Dataset(labels,vids_root, annot_root)
     if len(dataset) == 0:
@@ -289,7 +289,7 @@ if __name__ == "__main__":
     test_correct = 0
     test_total = 0
     
-    print("\n🔬 Evaluating Model Performance Against Unseen Test Set...")
+    print("\n Evaluating Model Performance Against Unseen Test Set...")
     with torch.no_grad():
         for feat, label in test_loader:
             feat, label = feat.to(device), label.to(device)
@@ -301,4 +301,4 @@ if __name__ == "__main__":
             test_correct += predicted.eq(label).sum().item()
             
     final_test_accuracy = (test_correct / test_total) * 100
-    print(f"📊 Final Accuracy on the Test Set: {final_test_accuracy:.2f}%")
+    print(f" Final Accuracy on the Test Set: {final_test_accuracy:.2f}%")
