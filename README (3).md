@@ -329,14 +329,6 @@ This makes weight loading independent of whether:
 - **No CLI arguments / config file** — all hyperparameters (epoch count, batch size, learning rate, crop size, max players, target frames, etc.) are Python constants inside each script. Edit the source directly to change training settings.
 - **`.lightning_studio/on_start.sh` / `on_stop.sh`** are empty hooks for the Lightning AI cloud IDE (run on studio start/stop) — safe to ignore if running elsewhere.
 
-## Known Issues / Caveats
-
-These are pre-existing quirks in the codebase (left as-is, since source code was not modified for this README):
-
-- **`get_all_labels` signature mismatch:** `Baseline_B6.py` and `Full_Model.py` call `get_all_labels(vids_root, categories_dct)` (two arguments), but the function is defined in `Baseline_B3.py` as `get_all_labels(annot_path)` (one argument, with `categories_dct` used as a module-level global instead of a parameter). Running `Baseline_B6.py` or `Full_Model.py` as-is will raise a `TypeError` unless this call is adjusted to match the actual function signature.
-- **Feature format mismatch:** `extract_feat.py` saves person-level features as a plain stacked `np.ndarray` (`np.save(output_file, final_clip_array)`), but `Baseline_B2.py` loads person-level features expecting a **pickled dict** (`np.load(path, allow_pickle=True).item()`). These two scripts are not directly interoperable without adjusting one of them.
-- **Inconsistent label naming:** category dictionaries use a mix of hyphens and underscores across files (e.g. `'l-pass'` in `Baseline_B3.py` vs. `'l_pass'` elsewhere), and `Baseline_b4.py` explicitly normalizes this with `label_str.replace("-", "_")` before lookup — worth checking if you see clips being silently skipped due to unmatched labels.
-- **`Baseline_B3.py`** has its model-saving line commented out at the end of `__main__`, so running it as-is will train/evaluate but **not** persist a checkpoint.
 
 ## Citation
 
